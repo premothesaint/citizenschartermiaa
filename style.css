@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: black;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+#bg-slideshow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+#bg-slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#bg-slideshow img.active {
+  opacity: 1;
+}
+
+@keyframes wave-slide {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+#swipe-label {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+  z-index: 1;
+  animation: wave-slide 1.5s ease-in-out infinite;
+}
+
+#top-box {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 1;
+}
+
+#top-box.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.button-container {
+  transition: opacity 0.3s ease;
+}
+
+.button-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.button-container:not(.visible) {
+  opacity: 0;
+  pointer-events: none; /* Prevent clicks when hidden */
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr); /* 4 rows x 4 columns = 16 buttons */
+  gap: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 1;
+
+  /* Glassmorphism effect */
+  background: rgba(66, 66, 66, 0.068); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blurring the background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.button-container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.office-button {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  justify-content: center;
+  padding: 8px 12px;
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.office-button:active {
+  background-color: rgba(200, 200, 200, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slightly smaller shadow on active state */
+}
+
+@media (max-width: 1024px) {
+  .button-container {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+  }
+}
